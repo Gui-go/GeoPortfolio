@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guigo's Portfolio</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@latest/ol.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="welcome" class="logo">Guilherme Viegas</a>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li><a href="welcome" class="nav-link">Welcome</a></li>
+                <li><a href="resume" class="nav-link">Resume</a></li>
+                <li><a href="publications" class="nav-link">Publications</a></li>
+                <li class="dropdown"> <a href="geolayers" class="nav-link">GeoLayers</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/geolayers/citiesivebeen/" class="nav-sublink">Cities I've been</a></li>
+                        <li><a href="/geolayers/geopoints/" class="nav-sublink">GeoPoints</a></li>
+                        <li><a href="/geolayers/teste/" class="nav-sublink">Teste</a></li>
+                    </ul>
+                </li>
+                <li><a href="about" class="nav-link">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <div id="map" class="map"></div>
+    </main>
+    <script>
+        const map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM(),
+                    visible: true
+                }),
+                new ol.layer.Tile({
+                    source: new ol.source.TileWMS({
+                        url: 'http://localhost:8080/geoserver/ws1/wms',
+                        params: {
+                            'LAYERS': 'ws1:geopoints',
+                            'TILED': true
+                        },
+                        serverType: 'geoserver',
+                        visible: false
+                    })
+                })
+            ],
+            view: new ol.View({
+                // EPSG:102100 (webmercator)
+                // EPSG:3857 (Espherical Mercator)
+                projection: 'EPSG:4326',
+                center: ol.proj.fromLonLat([0, 0], 'EPSG:4326'),
+                zoom: 1
+            })
+        });
+    </script>
+</body>
+
+</html>
