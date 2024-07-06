@@ -11,7 +11,7 @@ locals {
   svc_name        = "portfolio"
   vm_user         = "useradmin"
   kv_name         = "kv-geoportfolio"
-  #kvsecret_name   = "vm-passwd"
+  kvsecret_name   = "vm-passwd"
   location        = "westeurope"
   tag1_value      = "Guilherme Viegas"
   tag2_value      = "Portfolio"
@@ -28,7 +28,7 @@ data "azurerm_key_vault_secret" "tfazkvsecretgithubtoken" {
 }
 
 data "azurerm_key_vault_secret" "tfazkvsecretvmpasswd" {
-  name         = "az-vm-passwd"
+  name         = local.kvsecret_name
   key_vault_id = "/subscriptions/${local.subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.KeyVault/vaults/${local.kv_name}"
 }
 
