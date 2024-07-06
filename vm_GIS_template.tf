@@ -10,7 +10,7 @@ locals {
   rg_name         = "rg-portfolio"
   svc_name        = "portfolio"
   vm_user         = "useradmin"
-  kv_name         = "kv-geoportfolio"
+  kv_name         = "kvgeoportfolio"
   kvsecret_name   = "vm-passwd"
   location        = "westeurope"
   tag1_value      = "Guilherme Viegas"
