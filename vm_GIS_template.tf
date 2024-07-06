@@ -10,7 +10,7 @@ locals {
   rg_name         = "rg-portfolio"
   svc_name        = "portfolio"
   vm_user         = "useradmin"
-  kv_name         = "kvGIS"
+  kv_name         = "kv-geoportfolio"
   location        = "westeurope"
   tag1_value      = "Guilherme Viegas"
   tag2_value      = "Portfolio"
@@ -104,16 +104,16 @@ resource "azurerm_linux_virtual_machine" "tfazvmachine" {
     user     = local.vm_user
     password = data.azurerm_key_vault_secret.tfazkvsecretvmpasswd.value
   }
-  provisioner "file" {
-    source      = "init_prepare_vm.sh"
-    destination = "/tmp/init_prepare_vm.sh"
-  }
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/init_prepare_vm.sh",
-      "sh /tmp/init_prepare_vm.sh \"${azurerm_public_ip.tfazpubip.ip_address}\" \"${data.azurerm_key_vault_secret.tfazkvsecretsubscriptionid.value}\" \"${data.azurerm_key_vault_secret.tfazkvsecretgithubtoken.value}\" >> /tmp/init_prepare_vm.log 2>&1 "
-    ]
-  }
+  #provisioner "file" {
+  #  source      = "init_prepare_vm.sh"
+  #  destination = "/tmp/init_prepare_vm.sh"
+  #}
+  #provisioner "remote-exec" {
+  #  inline = [
+  #    "chmod +x /tmp/init_prepare_vm.sh",
+  #    "sh /tmp/init_prepare_vm.sh \"${azurerm_public_ip.tfazpubip.ip_address}\" \"${data.azurerm_key_vault_secret.tfazkvsecretsubscriptionid.value}\" \"${data.azurerm_key_vault_secret.tfazkvsecretgithubtoken.value}\" >> /tmp/init_prepare_vm.log 2>&1 "
+  #  ]
+  #}
   tags = {
     Owner   = local.tag1_value
     Project = local.tag2_value
