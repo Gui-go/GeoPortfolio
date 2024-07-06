@@ -11,7 +11,7 @@ locals {
   svc_name        = "portfolio"
   vm_user         = "useradmin"
   kv_name         = "kv-geoportfolio"
-  kvsecret_name   = "vm-passwd"
+  #kvsecret_name   = "vm-passwd"
   location        = "westeurope"
   tag1_value      = "Guilherme Viegas"
   tag2_value      = "Portfolio"
@@ -24,12 +24,12 @@ data "azurerm_key_vault_secret" "tfazkvsecretsubscriptionid" {
 
 data "azurerm_key_vault_secret" "tfazkvsecretgithubtoken" {
   name         = "gistemplate-github-token"
-  key_vault_id = "/subscriptions/${local.subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.${local.kvsecret_name}/vaults/${local.kv_name}"
+  key_vault_id = "/subscriptions/${local.subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.KeyVault/vaults/${local.kv_name}"
 }
 
 data "azurerm_key_vault_secret" "tfazkvsecretvmpasswd" {
   name         = "az-vm-passwd"
-  key_vault_id = "/subscriptions/${local.subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.${local.kvsecret_name}/vaults/${local.kv_name}"
+  key_vault_id = "/subscriptions/${local.subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.KeyVault/vaults/${local.kv_name}"
 }
 
 resource "azurerm_virtual_network" "tfazvnet" {
