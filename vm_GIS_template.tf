@@ -17,15 +17,15 @@ locals {
   tag2_value      = "Portfolio"
 }
 
-data "azurerm_key_vault_secret" "tfazkvsecretsubscriptionid" {
-  name         = "baitatec-stgacc-conx-key"
-  key_vault_id = "/subscriptions/${local.subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.KeyVault/vaults/${local.kv_name}"
-}
+#data "azurerm_key_vault_secret" "tfazkvsecretsubscriptionid" {
+#  name         = "stgacc-conx-key"
+#  key_vault_id = "/subscriptions/${local.subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.KeyVault/vaults/${local.kv_name}"
+#}
 
-data "azurerm_key_vault_secret" "tfazkvsecretgithubtoken" {
-  name         = "gistemplate-github-token"
-  key_vault_id = "/subscriptions/${local.subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.KeyVault/vaults/${local.kv_name}"
-}
+#data "azurerm_key_vault_secret" "tfazkvsecretgithubtoken" {
+#  name         = "gistemplate-github-token"
+#  key_vault_id = "/subscriptions/${local.subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.KeyVault/vaults/${local.kv_name}"
+#}
 
 data "azurerm_key_vault_secret" "tfazkvsecretvmpasswd" {
   name         = local.kvsecret_name
