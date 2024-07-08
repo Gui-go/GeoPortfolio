@@ -13,6 +13,8 @@ init_prepare_vm() {
     sudo apt install docker -y
     sudo apt install docker-compose -y
 
+    sudo apt install nginx-full 
+
     echo 'Install additional packages:'
     sudo apt install unzip
 
@@ -31,7 +33,7 @@ init_prepare_vm() {
     echo "github_token=$github_token" >> ~/.bashrc
 
     echo 'Git clone the repo:'
-    git clone https://$github_token:x-oauth-basic@github.com/DAAI-Noesis/GIS_template.git
+    git clone https://$github_token:x-oauth-basic@github.com/project-proj/project.git
 
     #echo 'Download rede.zip data from Azure storage:'
     mkdir -p ~/GIS_template/etl/data/
